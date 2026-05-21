@@ -5,88 +5,49 @@ node_modules/
 # Build outputs
 dist/
 build/
-coverage/
-htmlcov/
+.next/
 
 # Environment variables
 .env
 .env.local
 .env.*
 
-# Python specific
+# IDE files
+.vscode/
+.idea/
+
+# Python cache (if any Python files exist in the project)
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
-.Python
-env/
-venv/
-.venv/
-pip-log.txt
-pip-delete-this-directory.txt
-.tox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-*.log
-*.pot
-*.pyc
-*.pyo
-.pytest_cache/
-.mypy_cache/
-
-# IDE and editor files
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-
-# OS generated files
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
-Icon?
-apidoc/
 
 # Logs
 *.log
 
-# Runtime data
-pids
-*.pid
-*.seed
-*.pid.lock
+# OS generated files
+.DS_Store
+Thumbs.db
 
-# Temporary folders
-tmp/
-temp/
-tmp/**
-temp/**
+# Coverage reports
+coverage/
+htmlcov/
+.coverage
 
-# Compiled binary files
-*.exe
-*.dll
-*.so
-*.dylib
-
-# Compression files
-*.zip
-*.tar.gz
-*.tar.bz2
-*.tar.xz
-*.gz
-*.rar
-*.7z
+# Temporary files
+*.tmp
+*.swp
+*.swo
 
 # Testing
+.mypy_cache/
+.pytest_cache/
+.nyc_output/
 coverage/
-junit.xml
+
+# Distribution / packaging
+*.tar.gz
+*.whl
+*.egg
+*.egg-info/
 ```

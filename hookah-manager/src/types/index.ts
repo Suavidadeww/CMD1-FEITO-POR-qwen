@@ -1,78 +1,128 @@
-export interface MenuItem {
+export interface User {
+  id: string;
+  email: string;
+  name: string;
+  role: 'admin' | 'manager' | 'staff';
+  avatar_url?: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface Category {
   id: string;
   name: string;
-  category: string;
+  description?: string;
+  icon?: string;
+  color: string;
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface Product {
+  id: string;
+  category_id?: string;
+  name: string;
+  description?: string;
   price: number;
-  cost: number;
-  unit: string;
-  imageUrl: string;
-  isFeatured: boolean;
-  isActive: boolean;
-  costs?: ItemCost[];
+  cost?: number;
+  sku?: string;
+  barcode?: string;
+  stock_quantity: number;
+  min_stock: number;
+  image_url?: string;
+  is_active: boolean;
+  is_featured: boolean;
+  created_at: string;
+  updated_at: string;
+  category?: Category;
 }
 
-export interface ItemCost {
+export interface Table {
   id: string;
   name: string;
-  value: number;
+  number?: string;
+  capacity: number;
+  location?: string;
+  is_active: boolean;
+  created_at: string;
 }
 
-export interface Client {
+export interface Order {
   id: string;
-  name: string;
-  cpf: string;
-  whatsapp: string;
-  createdAt: string;
-  totalVisits: number;
-  totalSpent: number;
+  order_number: string;
+  table_id?: string;
+  user_id?: string;
+  status: 'pending' | 'preparing' | 'ready' | 'delivered' | 'cancelled' | 'paid';
+  subtotal: number;
+  discount?: number;
+  tax?: number;
+  total: number;
+  payment_method?: string;
+  payment_status: 'pending' | 'partial' | 'paid' | 'refunded';
+  notes?: string;
+  created_at: string;
+  updated_at: string;
+  completed_at?: string;
+  table?: Table;
+  items?: OrderItem[];
 }
 
-export interface CartItem {
-  menuItemId: string;
-  name: string;
-  price: number;
+export interface OrderItem {
+  id: string;
+  order_id: string;
+  product_id: string;
   quantity: number;
-  observation?: string;
-  imageUrl?: string;
+  unit_price: number;
+  subtotal: number;
+  notes?: string;
+  created_at: string;
+  product?: Product;
 }
 
-export interface CommandLog {
+export interface Customer {
   id: string;
-  action: string;
-  timestamp: string;
-  details?: string;
+  name: string;
+  phone?: string;
+  email?: string;
+  points: number;
+  total_spent: number;
+  visits: number;
+  last_visit?: string;
+  created_at: string;
+  updated_at: string;
 }
 
-export interface Command {
+export interface InventoryMovement {
   id: string;
-  tableNumber: string;
-  clientId?: string;
-  clientName?: string;
-  items: CartItem[];
-  status: 'open' | 'closed';
-  openedAt: string;
-  closedAt?: string;
-  discount: number;
-  paymentMethod?: PaymentMethod;
-  splitCount: number;
-  totalPaid?: number;
-  logs: CommandLog[];
+  product_id: string;
+  user_id?: string;
+  type: 'entry' | 'exit' | 'adjustment' | 'sale' | 'return';
+  quantity: number;
+  previous_stock?: number;
+  new_stock?: number;
+  reason?: string;
+  reference_id?: string;
+  reference_type?: string;
+  created_at: string;
+  product?: Product;
 }
 
-export type PaymentMethod = 'dinheiro' | 'pix' | 'credito' | 'debito' | 'misto' | 'fiado';
-
-export interface DailyStats {
-  date: string;
-  revenue: number;
-  profit: number;
-  commands: number;
-  itemsSold: number;
+export interface Settings {
+  id: string;
+  key: string;
+  value: Record<string, unknown>;
+  description?: string;
+  updated_by?: string;
+  created_at: string;
+  updated_at: string;
 }
 
-export interface AppData {
-  menuItems: MenuItem[];
-  clients: Client[];
-  commands: Command[];
-  dailyStats: DailyStats[];
-  theme: 'light' | 'dark';
+export interface DashboardStats {
+  totalOrders: number;
+  pendingOrders: number;
+  todayRevenue: number;
+  monthlyRevenue: number;
+  lowStockProducts: number;
+  activeTables: number;
 }
